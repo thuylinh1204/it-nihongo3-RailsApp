@@ -29,6 +29,7 @@
                                     <%= link_to current_user.name, users_path , class: "nav-link" %>
                                 <% else %>
                                     <%= link_to "ログイン", login_url , class: "nav-link" %>
+                                    <%= link_to "Đăng ký", new_user_path %>
                                 <% end %>
                             </li>
                         </ul>
