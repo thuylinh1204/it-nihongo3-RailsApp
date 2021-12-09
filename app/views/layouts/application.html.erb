@@ -9,7 +9,7 @@
   </head>
 
   <body>
-      <%= link_to "ホーム", root_path %>
+      <div class="home"></div><%= link_to "ホーム", root_path %></div>
       
       <% if logged_in? %>
             <%= link_to current_user.name, users_path %>
