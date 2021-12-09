@@ -1,7 +1,7 @@
 <h1>Welcome</h1>
  
 <p>Đây là trang home</p>
- 
+ <%= link_to "View Company", companies_path %>
 <% if logged_in? %>
     <%= button_to 'Logout', '/logout', :method => :delete %>
 <% end %>
