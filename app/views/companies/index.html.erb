@@ -6,11 +6,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Programming langue</th>
-      <th>Vacancy</th>
       <th>Location</th>
       <th>Website link</th>
-      <th>Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,11 +16,8 @@
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
-        <td><%= company.programming_langue %></td>
-        <td><%= company.vacancy %></td>
         <td><%= company.location %></td>
         <td><%= company.website_link %></td>
-        <td><%= company.description %></td>
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
