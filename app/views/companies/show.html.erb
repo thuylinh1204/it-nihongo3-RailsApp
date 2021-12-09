@@ -29,6 +29,24 @@
   <strong>Description:</strong>
   <%= @company.description %>
 </p>
+<h2>Review </h2>
+<%= form_with(model: @review, local: true) do |form| %>
+  <div class= "field">
+    <%= form.text_area :review %>
+    <%= form.hidden_field :company_id, :value => @company.id %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<h2>Review List</h2>
+<ul>
+  <% @company.review.each do |review|%>
+   <li><%= review.review %>
+     (<i><%= review.user_id %></i>)</li>
+<% end %>
+</ul>
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

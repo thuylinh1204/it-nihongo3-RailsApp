@@ -1,5 +1,6 @@
 
 Rails.application.routes.draw do
+  resources :reviews
     resources :companies
     root 'admin#index'
     resources :users
