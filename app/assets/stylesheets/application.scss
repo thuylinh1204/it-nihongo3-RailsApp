@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+body{
+    background-color: #ebebeb;
+}
 
 .header .header-logo a img {
 	width: 3rem;
