@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Companies</h1>
-
-<table>
-  <thead>
+<%= link_to 'New Company?', new_company_path %>
+<table class="table table-hover">
+  <thead class="">
     <tr>
       <th>Name</th>
       <th>Location</th>
@@ -17,7 +17,7 @@
       <tr>
         <td><%= company.name %></td>
         <td><%= company.location %></td>
-        <td><%= company.website_link %></td>
+        <td><a href=<%= company.website_link %> class="link-primary link-white-1"><%= company.website_link %></a></td>
         <td><%= link_to 'Show', company %></td>
         <td><%= link_to 'Edit', edit_company_path(company) %></td>
         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Company', new_company_path %>
+
