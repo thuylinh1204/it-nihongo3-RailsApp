@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div id="company-detail">
     <div id="company-detail-info container">
-        <div class="row company-item">
+        <div class="row company-item ">
             <div class="col-4 logo-container">
                 <a href="/companies/<%= @company.id %>">
                     <% if @company.image.attached? %>
@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div id="company-detail-desc" class="container">
+    <div id="company-detail-desc" class="container theme-box">
         <div class="row">
             <h4>会社情報</h4>
             <div id="company-detail-desc-content">
@@ -43,12 +43,46 @@
         </div>
     </div>
 </div>
-<h2>Review List</h2>
-<ul>
-    <% @company.review.each do |review|%>
-        <li><%= review.review %>
-            (<i><%= review.user_id %></i>)</li>
+<div id="review-company" class="theme-box">
+    <%= form_with(model: @review, local: true) do |form| %>
+        <div class="mb-3">
+            <%# <label class="form-label" for="review_review">コメント</label> %>
+            <%= form.text_area :review , :class => "form-control"%>
+        </div>
+        <div class= "field">
+            <%= form.hidden_field :company_id, :value => @company.id %>
+            <%= form.hidden_field :user_id , :value => current_user.id %>
+        </div>
+        <div class="actions text-center">
+            <%= form.submit "コメント" , class: 'btn btn-danger fw-bold' %>
+        </div>
     <% end %>
-</ul>
+</div>
+<div id="comment-list">
+    <h3 class="text-center m-2">コメント一覧</h3>
+    <div class="container">
+    </div>
+    <% @company.review.each do |review|%>
+        <div class="row company-item theme-box">
+            <div class="col">
+                <div class="comment-list-detail">
+                    <div class="comment-list-header row">
+                        <div class="col-8">
+                            <i class="bi bi-person-circle"></i>
+                            <span> <%= review.user_id %> </span>
+                        </div>
+                        <div class="col-4" style="text-align: right;">
+                            <i class="bi bi-clock-fill"></i>
+                            <span> <%= review.created_at %> </span>
+                        </div>
+                    </div>
+                    <div class="comment-list-content">
+                        <p> <%= review.review %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

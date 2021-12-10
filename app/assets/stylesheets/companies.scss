@@ -5,14 +5,35 @@
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
-#company-detail-desc {
-	box-shadow: 0 2px 20px rgba(243, 4, 4, 0.26);
-	border-radius: 10px;
-	padding: 1rem;
-	background-color: white;
-	margin-top: 1rem;
-}
+// #company-detail-desc {
+// 	box-shadow: 0 2px 20px rgba(243, 4, 4, 0.26);
+// 	border-radius: 10px;
+// 	padding: 1rem;
+// 	background-color: white;
+// 	margin-top: 1rem;
+// }
 #company-detail-desc-content {
 	overflow-y: scroll;
 	max-height: 20rem;
+}
+
+#comment-list {
+	background-color: #fc625a;
+	padding: 5px 20px;
+	border-radius: 10px;
+}
+
+#comment-list h3 {
+	color: white;
+	font-weight: bold;
+}
+
+.comment-list-header {
+    font-size: 20px;
+	border-bottom: 3px solid rgba(10, 10, 10, 0.1);
+	padding: 0.5rem 0rem;
+}
+
+.comment-list-content {
+    padding: 0.5rem;
 }

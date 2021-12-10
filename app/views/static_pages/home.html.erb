@@ -24,7 +24,7 @@
         <h1 class="text-center m-2">会社一覧</h1>
         <div class="container">
             <% @companies.each do |company| %>
-                <div class="row company-item">
+                <div class="row company-item theme-box">
                     <div class="col-4 logo-container">
                         <a href="/companies/<%= company.id %>">
                             <% if company.image.attached? %>
