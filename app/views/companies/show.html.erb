@@ -29,7 +29,10 @@
   <strong>Description:</strong>
   <%= @company.description %>
 </p>
-
+<p>
+  <strong>Detail description:</strong>
+  <%= @company.detail_desc %>
+</p>
 <h2>Review List</h2>
 <ul>
   <% @company.review.each do |review|%>
