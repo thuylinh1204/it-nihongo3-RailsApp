@@ -27,7 +27,11 @@
                 <div class="row company-item">
                     <div class="col-4 logo-container">
                         <a href="/companies/<%= company.id %>">
-                            <img src="/images/logo/dimageshare.png" class="img-thumbnail" alt="...">
+                            <% if company.image.attached? %>
+                                <%= image_tag company.image , :class => "img-thumbnail"%>
+                            <% else%>
+                                <img src="/images/logo/logo-default.jpeg" class="img-thumbnail" alt="...">
+                            <% end %>
                         </a>
                     </div>
                     <div class="col-8">

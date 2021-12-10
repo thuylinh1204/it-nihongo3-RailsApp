@@ -1,50 +1,54 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @company.name %>
-</p>
-
-<p>
-  <strong>Programming langue:</strong>
-  <%= @company.programming_langue %>
-</p>
-
-<p>
-  <strong>Vacancy:</strong>
-  <%= @company.vacancy %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @company.location %>
-</p>
-
-<p>
-  <strong>Website link:</strong>
-  <%= @company.website_link %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @company.description %>
-</p>
-<p>
-  <strong>Detail description:</strong>
-  <%= @company.detail_desc %>
-</p>
-<p>
-  <% if @company.image.attached? %>
-    <%= image_tag @company.image %>
-  <% end %>
-</p>
+<div id="company-detail">
+    <div id="company-detail-info container">
+        <div class="row company-item">
+            <div class="col-4 logo-container">
+                <a href="/companies/<%= @company.id %>">
+                    <% if @company.image.attached? %>
+                        <%= image_tag @company.image , :class => "img-thumbnail"%>
+                    <% else%>
+                        <img src="/images/logo/logo-default.jpeg" class="img-thumbnail" alt="...">
+                    <% end %>
+                </a>
+            </div>
+            <div class="col-8">
+                <h2 class="company-name m-2">
+                    <a href="/companies/<%= @company.id %>"><%= @company.name %></a>
+                </h2>
+                <div class="language m-2">
+                    <i class="bi bi-gear-fill"></i>
+                    <span><%= @company.programming_langue %></span>
+                </div>
+                <div class="description m-2">
+                    <i class="bi bi-person-square"></i>
+                    <span><%= @company.description %></span>
+                </div>
+                <div class="location m-2">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span><%= @company.location %></span>
+                </div>
+                <div class="website m-2">
+                    <i class="bi bi-globe"></i>
+                    <span><a href="<%= @company.website_link %>"><%= @company.website_link %></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="company-detail-desc" class="container">
+        <div class="row">
+            <h4>会社情報</h4>
+            <div id="company-detail-desc-content">
+                <%= sanitize @company.detail_desc %>
+            </div>
+        </div>
+    </div>
+</div>
 <h2>Review List</h2>
 <ul>
-  <% @company.review.each do |review|%>
-   <li><%= review.review %>
-     (<i><%= review.user_id %></i>)</li>
-<% end %>
+    <% @company.review.each do |review|%>
+        <li><%= review.review %>
+            (<i><%= review.user_id %></i>)</li>
+    <% end %>
 </ul>
-
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

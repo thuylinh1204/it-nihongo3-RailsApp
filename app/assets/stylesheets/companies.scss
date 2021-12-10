@@ -1,6 +1,18 @@
 // Place all the styles related to the Companies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.link-white-1:hover{
-    background-color:rgba(0, 0, 0, 0.075);
+.link-white-1:hover {
+	background-color: rgba(0, 0, 0, 0.075);
+}
+
+#company-detail-desc {
+	box-shadow: 0 2px 20px rgba(243, 4, 4, 0.26);
+	border-radius: 10px;
+	padding: 1rem;
+	background-color: white;
+	margin-top: 1rem;
+}
+#company-detail-desc-content {
+	overflow-y: scroll;
+	max-height: 20rem;
 }
