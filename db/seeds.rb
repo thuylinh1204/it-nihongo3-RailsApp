@@ -7,4 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create([{ name: 'nhom7',hashed_password: 'b9cc981c28208baf575178f624a4d67b2d051e5a7e5655dae6ec1066b79dcfb0',salt: '244800.5082238970971115',role: 'admin' }])
+User.create([{ name: 'admin',hashed_password: 'b9cc981c28208baf575178f624a4d67b2d051e5a7e5655dae6ec1066b79dcfb0',salt: '244800.5082238970971115',role: 'admin' }])
+User.create([{ name: 'user',hashed_password: 'b9cc981c28208baf575178f624a4d67b2d051e5a7e5655dae6ec1066b79dcfb0',salt: '244800.5082238970971115',role: 'user' }])
