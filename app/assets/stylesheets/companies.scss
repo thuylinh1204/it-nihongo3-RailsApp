@@ -29,11 +29,24 @@
 }
 
 .comment-list-header {
-    font-size: 20px;
+	font-size: 20px;
 	border-bottom: 3px solid rgba(10, 10, 10, 0.1);
 	padding: 0.5rem 0rem;
 }
 
 .comment-list-content {
-    padding: 0.5rem;
+	padding: 0.5rem;
+}
+
+.reply-symbol {
+	text-align: right;
+	font-size: 20px;
+}
+
+.reply-list {
+	padding: 5px 20px;
+    margin-top: 5px;
+}
+.reply-item {
+	border-top: 3px solid rgba(10, 10, 10, 0.1);
 }

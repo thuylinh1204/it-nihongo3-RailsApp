@@ -1,5 +1,6 @@
 
 Rails.application.routes.draw do
+  resources :replies
     root 'static_pages#home'
     get 'static_pages/home'
     resources :reviews

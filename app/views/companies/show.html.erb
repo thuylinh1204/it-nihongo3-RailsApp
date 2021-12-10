@@ -79,10 +79,45 @@
                     <div class="comment-list-content">
                         <p> <%= review.review %></p>
                     </div>
+                    <div class="reply-symbol"><span class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-reply<%= review.id %>"><i class="bi bi-reply-fill"></i></span> </div>
+                    <div class="modal fade" id="modal-reply<%= review.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Reply</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <%= form_with(model: @reply, local: true) do |form| %>
+                                    <div class="modal-body">
+                                        <div class="field">
+                                            <%= form.hidden_field :review_id, :value => review.id %>
+                                            <%= form.hidden_field :user_id , :value => current_user.id %>
+                                            <%= form.hidden_field :company_id , :value => @company.id %>
+                                        </div>
+                                        <div class="field">
+                                            <%= form.text_area :content , :class => "form-control"%>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <%= form.submit "Save change" , class: 'btn btn-outline-danger' %>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reply-list">
+                    <% review.reply.each do |reply|%>
+                        <div class="reply-item">
+                            <p> <strong> <%= reply.user_id %></strong> - <%= reply.created_at %> </p>
+                            <p> <%= reply.content %> </p>                            
+                        </div>
+                    <% end %>
                 </div>
             </div>
         </div>
     <% end %>
 </div>
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%# <%= link_to 'Edit', edit_company_path(@company) %>  
+<%# <%= link_to 'Back', companies_path %> 
