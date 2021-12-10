@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_093633) do
     t.string "name"
     t.string "hashed_password"
     t.string "salt"
+    t.string "role", default: "user", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
