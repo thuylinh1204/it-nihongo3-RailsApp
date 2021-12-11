@@ -29,7 +29,7 @@
                 </div>
                 <div class="website m-2">
                     <i class="bi bi-globe"></i>
-                    <span><a href="<%= @company.website_link %>"><%= @company.website_link %></a></span>
+                    <span><a href="<%= @company.website_link %>" target="_blank"><%= @company.website_link %></a></span>
                 </div>
             </div>
         </div>
@@ -44,80 +44,86 @@
     </div>
 </div>
 <div id="review-company" class="theme-box">
+    <% if !logged_in? %>
+        <div class="my-2">
+            <i class="bi bi-exclamation-square-fill text-danger"></i>
+            <span class="mx-2">You have to sign in to comment and reply comments</span>
+        </div>
+    <% end %>
     <%= form_with(model: @review, local: true) do |form| %>
         <div class="mb-3">
-            <%# <label class="form-label" for="review_review">コメント</label> %>
             <%= form.text_area :review , :class => "form-control"%>
         </div>
         <div class= "field">
             <%= form.hidden_field :company_id, :value => @company.id %>
-            <%= form.hidden_field :user_id , :value => current_user.id %>
         </div>
         <div class="actions text-center">
-            <%= form.submit "コメント" , class: 'btn btn-danger fw-bold' %>
+            <input type="submit" name="commit" value="コメント" class="btn btn-danger fw-bold" data-disable-with="コメント" <%= logged_in? ? '' : "disabled" %>>
         </div>
     <% end %>
 </div>
 <div id="comment-list">
     <h3 class="text-center m-2">コメント一覧</h3>
     <div class="container">
-    </div>
-    <% @company.review.each do |review|%>
-        <div class="row company-item theme-box">
-            <div class="col">
-                <div class="comment-list-detail">
-                    <div class="comment-list-header row">
-                        <div class="col-8">
-                            <i class="bi bi-person-circle"></i>
-                            <span> <%= review.user_id %> </span>
+        <% @company.review.each do |review|%>
+            <div class="row company-item theme-box">
+                <div class="col">
+                    <div class="comment-list-detail">
+                        <div class="comment-list-header row">
+                            <div class="col-8">
+                                <i class="bi bi-person-circle"></i>
+                                <span> <%= review.user_id %> </span>
+                            </div>
+                            <div class="col-4" style="text-align: right;">
+                                <i class="bi bi-clock-fill"></i>
+                                <span> <%= review.created_at %> </span>
+                            </div>
                         </div>
-                        <div class="col-4" style="text-align: right;">
-                            <i class="bi bi-clock-fill"></i>
-                            <span> <%= review.created_at %> </span>
+                        <div class="comment-list-content">
+                            <p> <%= review.review %></p>
                         </div>
-                    </div>
-                    <div class="comment-list-content">
-                        <p> <%= review.review %></p>
-                    </div>
-                    <div class="reply-symbol"><span class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-reply<%= review.id %>"><i class="bi bi-reply-fill"></i></span> </div>
-                    <div class="modal fade" id="modal-reply<%= review.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Reply</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="reply-symbol">
+                            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-reply<%= review.id %>" <%= logged_in? ? '' : "disabled" %> ><i class="bi bi-reply-fill"></i></button>
+                        </div>
+                        <div class="modal fade" id="modal-reply<%= review.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Reply</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <%= form_with(model: @reply, local: true) do |form| %>
+                                        <div class="modal-body">
+                                            <div class="field">
+                                                <%= form.hidden_field :review_id, :value => review.id %>
+                                                <%= form.hidden_field :company_id , :value => @company.id %>
+                                            </div>
+                                            <div class="field">
+                                                <%= form.text_area :content , :class => "form-control"%>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <%= form.submit "Save change" , class: 'btn btn-outline-danger' %>
+                                        </div>
+                                    <% end %>
                                 </div>
-                                <%= form_with(model: @reply, local: true) do |form| %>
-                                    <div class="modal-body">
-                                        <div class="field">
-                                            <%= form.hidden_field :review_id, :value => review.id %>
-                                            <%= form.hidden_field :user_id , :value => current_user.id %>
-                                            <%= form.hidden_field :company_id , :value => @company.id %>
-                                        </div>
-                                        <div class="field">
-                                            <%= form.text_area :content , :class => "form-control"%>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <%= form.submit "Save change" , class: 'btn btn-outline-danger' %>
-                                    </div>
-                                <% end %>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="reply-list">
-                    <% review.reply.each do |reply|%>
-                        <div class="reply-item">
-                            <p> <strong> <%= reply.user_id %></strong> - <%= reply.created_at %> </p>
-                            <p> <%= reply.content %> </p>                            
-                        </div>
-                    <% end %>
+                    <div class="reply-list">
+                        <% review.reply.each do |reply|%>
+                            <div class="reply-item">
+                                <p> <strong> <%= reply.user_id %></strong> - <%= reply.created_at %> </p>
+                                <p> <%= reply.content %> </p>
+                            </div>
+                        <% end %>
+                    </div>
                 </div>
             </div>
-        </div>
-    <% end %>
+        <% end %>
+    </div>
 </div>
-<%# <%= link_to 'Edit', edit_company_path(@company) %>  
-<%# <%= link_to 'Back', companies_path %> 
+<div class="my-5" style="text-align: right;">
+    <%= link_to 'Back', companies_path , class: 'btn btn-outline-danger' %>
+</div>

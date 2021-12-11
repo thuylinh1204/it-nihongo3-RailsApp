@@ -22,7 +22,7 @@ class RepliesController < ApplicationController
   # POST /replies or /replies.json
   def create
     @reply = Reply.new(reply_params)
-
+    @reply.user_id = current_user.id
     respond_to do |format|
       if @reply.save
         url = "/companies/" + @reply.company_id.to_s
