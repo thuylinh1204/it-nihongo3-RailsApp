@@ -3,7 +3,11 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    @companies = Company.all
+    @companies = if params[:term]
+        Company.where('name LIKE ?', "%#{params[:term]}%")
+    else
+        Company.all
+    end
   end
 
   # GET /companies/1 or /companies/1.json
@@ -66,6 +70,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_params
-      params.require(:company).permit(:name, :programming_langue, :vacancy, :location, :website_link, :description, :detail_desc, :image)
+      params.require(:company).permit(:name, :programming_langue, :vacancy, :location, :website_link, :description, :detail_desc, :image, :term)
     end
 end

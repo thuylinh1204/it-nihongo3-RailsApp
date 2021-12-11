@@ -59,10 +59,10 @@
                                 <% end %>
                             </li>
                         </ul>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn" type="submit"><i class="bi bi-search"></i></button>
-                        </form>
+                        <%= form_tag(companies_path, method: :get , class: "d-flex") do %>
+                            <%= text_field_tag :term , nil ,class: "form-control mx-2" ,placeholder: "Search company by name" %>
+                            <button class="btn" type="submit" style="background-color: #fff;"><i class="bi bi-search"></i></button>
+                        <% end %>
                     </div>
                 </div>
             </nav>
