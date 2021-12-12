@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+<div class="content">
+    <h1 class="text-center m-2">会社一覧</h1>
+    <% if logged_in?  && current_user.role == "admin" %>
+        <%= link_to 'New Company', new_company_path , :class => "btn btn-danger" %>
+    <% end %>
+    <div class="container">
+        <% @companies.each do |company| %>
+            <div class="row company-item theme-box">
+                <div class="col-4 logo-container">
+                    <a href="/companies/<%= company.id %>">
+                        <% if company.image.attached? %>
+                            <%= image_tag company.image , :class => "img-thumbnail"%>
+                        <% else%>
+                            <img src="/images/logo/logo-default.jpeg" class="img-thumbnail" alt="...">
+                        <% end %>
+                    </a>
+                </div>
+                <div class="col-10">
+                    <h2 class="company-name m-2">
+                        <a href="/companies/<%= company.id %>"><%= company.name %></a>
+                    </h2>
+                    <div class="language m-2">
+                        <i class="bi bi-gear-fill"></i>
+                        <span><%= company.programming_langue %></span>
+                    </div>
+                    <div class="description m-2">
+                        <i class="bi bi-person-square"></i>
+                        <span><%= company.description %></span>
+                    </div>
+                    <div class="location m-2">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span><%= company.location %></span>
+                    </div>
+                    <div class="website m-2">
+                        <i class="bi bi-globe"></i>
+                        <span><a href="<%= company.website_link %>" target="_blank"><%= company.website_link %></a></span>
+                    </div>
+                    <% if logged_in?  && current_user.role == "admin" %>
+                        <div class="m-2" style="text-align: right;">
+                            <%= link_to 'Edit', edit_company_path(company) , :class => "btn btn-outline-danger mx-3" %>
+                            <%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } , :class => "btn btn-danger" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

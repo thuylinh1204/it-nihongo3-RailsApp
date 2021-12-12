@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div class="account">
+    <h1>Tài khoản</h1>
+
+    <div>
+        <div>UserName : <%= @users.name %></div>
+        <div><%= link_to 'Show', @users %></div>
+        <div><%= link_to 'Edit', edit_user_path(@users) %></div>
+        <div><%= link_to 'Destroy', @users, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    </div>
+    
+    <%= button_to 'Logout', '/logout', :method => :delete %>
+</div>
