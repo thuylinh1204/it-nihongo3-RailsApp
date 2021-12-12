@@ -72,7 +72,7 @@
                         <div class="comment-list-header row">
                             <div class="col-8">
                                 <i class="bi bi-person-circle"></i>
-                                <span> <%= review.user_id %> </span>
+                                <span> <%= review.user.name %> </span>
                             </div>
                             <div class="col-4" style="text-align: right;">
                                 <i class="bi bi-clock-fill"></i>
@@ -114,7 +114,7 @@
                     <div class="reply-list">
                         <% review.reply.each do |reply|%>
                             <div class="reply-item">
-                                <p> <strong> <%= reply.user_id %></strong> - <%= reply.created_at %> </p>
+                                <p> <strong> <%= reply.user.name %></strong> - <%= reply.created_at %> </p>
                                 <p> <%= reply.content %> </p>
                             </div>
                         <% end %>

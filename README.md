@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+# it-nihongo3-RailsApp
+Group project build a application by Ruby on Rails to review company join Jobfair for Hedspi student
+=======
 # Run
 
 1. bundle install
@@ -18,3 +22,4 @@ or
     - password : 123
 
 
+>>>>>>> d1dd7193bb144b56848d3a8532482c1be2e3b96c
