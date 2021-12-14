@@ -60,7 +60,7 @@
                             </li>
                         </ul>
                         <%= form_tag(companies_path, method: :get , class: "d-flex") do %>
-                            <%= text_field_tag :term , nil ,class: "form-control mx-2" ,placeholder: "Search company by name" %>
+                            <%= text_field_tag :term , nil ,class: "form-control mx-2" ,placeholder: "会社名で会社情報を検索" %>
                             <button class="btn" type="submit" style="background-color: #fff;"><i class="bi bi-search"></i></button>
                         <% end %>
                     </div>

@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
             if user.role == "user"
                 redirect_to root_path
             else
-                redirect_to admin_index_path
+                redirect_to root_path
             end
         else
             redirect_to login_url, :alert => "Invalid username/password"
